@@ -1,13 +1,18 @@
 package com.felipeam10.send_book_email_spring_batch.reader;
 
+import com.felipeam10.send_book_email_spring_batch.domain.Book;
+import com.felipeam10.send_book_email_spring_batch.domain.User;
 import com.felipeam10.send_book_email_spring_batch.domain.UserBookLoan;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Configuration
 public class ReadUserWithLoansCloseToReturnReaderConfig {
@@ -32,4 +37,18 @@ public class ReadUserWithLoansCloseToReturnReaderConfig {
                 .build();
     }
 
+    private RowMapper<UserBookLoan> rowMapper() {
+        return new RowMapper<UserBookLoan>() {
+            @Override
+            public UserBookLoan mapRow(ResultSet rs, int rowNum) throws SQLException {
+                User user = new User(rs.getInt("user_id"), rs.getString("user_name"), rs.getString("user_email"));
+                Book book = new Book();
+                book.setId(rs.getInt("book_id"));
+                book.setName(rs.getString("book_name"));
+
+                UserBookLoan userBookLoan = new UserBookLoan(user, book, rs.getDate("loan_date"));
+                return userBookLoan;
+            }
+        };
+    }
 }
