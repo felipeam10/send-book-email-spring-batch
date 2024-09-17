@@ -3,6 +3,7 @@ package com.felipeam10.send_book_email_spring_batch.reader;
 import com.felipeam10.send_book_email_spring_batch.domain.Book;
 import com.felipeam10.send_book_email_spring_batch.domain.User;
 import com.felipeam10.send_book_email_spring_batch.domain.UserBookLoan;
+import com.felipeam10.send_book_email_spring_batch.util.GenerateBookReturnDate;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +18,7 @@ import java.sql.SQLException;
 @Configuration
 public class ReadUserWithLoansCloseToReturnReaderConfig {
 
-    int numDaysToNotifyReturn = 6;
+    int numDaysToNotifyReturn = GenerateBookReturnDate.numDaysToReturn - 1;
     @Bean
     public ItemReader<UserBookLoan> readUserWithLoansCloseToReturnReader(@Qualifier("appDS") DataSource dataSource) {
         return new JdbcCursorItemReaderBuilder<UserBookLoan>()
