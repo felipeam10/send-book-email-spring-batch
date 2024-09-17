@@ -1,9 +1,11 @@
 package com.felipeam10.send_book_email_spring_batch.step;
 
 import com.felipeam10.send_book_email_spring_batch.domain.UserBookLoan;
+import com.sendgrid.helpers.mail.Mail;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,13 @@ public class SendEmailUserStepConfig {
     private PlatformTransactionManager transactionManager;
     @Bean
     public Step sendEmailUserStep(ItemReader<UserBookLoan> readUserWithLoansCloseToReturnReader,
+            ItemProcessor<UserBookLoan, Mail> processorLoanNotificationEmailProcessor,
             ItemWriter<UserBookLoan> sendEmailReqyestReturnWriter,
             JobRepository jobRepository) {
         return new StepBuilder("sendEmailUserStep", jobRepository)
-                .<UserBookLoan, UserBookLoan>chunk(1, transactionManager)
+                .<UserBookLoan, Mail>chunk(1, transactionManager)
                 .reader(readUserWithLoansCloseToReturnReader)
+                .processor(processorLoanNotificationEmailProcessor)
                 .writer(sendEmailReqyestReturnWriter)
                 .build();
     }
