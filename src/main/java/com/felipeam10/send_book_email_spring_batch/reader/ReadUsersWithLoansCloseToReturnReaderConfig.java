@@ -16,13 +16,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Configuration
-public class ReadUserWithLoansCloseToReturnReaderConfig {
+public class ReadUsersWithLoansCloseToReturnReaderConfig {
 
-    int numDaysToNotifyReturn = GenerateBookReturnDate.numDaysToReturn - 1;
+    // value to notify user is obtained by subtracting one day of number days to return book
+    int numDaysToNotifyReturn = GenerateBookReturnDate.numDaysToReturnBook - 1;
+
     @Bean
-    public ItemReader<UserBookLoan> readUserWithLoansCloseToReturnReader(@Qualifier("appDS") DataSource dataSource) {
-        return new JdbcCursorItemReaderBuilder<UserBookLoan>()
-                .name("readUserWithLoansCloseToReturnReader")
+    public ItemReader<UserBookLoan> readUsersWithLoansCloseToReturnReader(@Qualifier("appDS") DataSource dataSource) {
+
+        return new JdbcCursorItemReaderBuilder<UserBookLoan>().name("readUsersWithLoansCloseToReturnReader")
                 .dataSource(dataSource)
                 .sql("SELECT user.id as user_id, "
                         + "user.name as user_name, "
@@ -34,12 +36,12 @@ public class ReadUserWithLoansCloseToReturnReaderConfig {
                         + "INNER JOIN tb_user as user ON loan.user_id = user.id "
                         + "INNER JOIN tb_book as book ON loan.book_id = book.id "
                         + "WHERE DATE_ADD(loan_date, INTERVAL " + numDaysToNotifyReturn + " DAY) = DATE(NOW());")
-                .rowMapper(rowMapper())
-                .build();
+                .rowMapper(rowMapper()).build();
     }
 
     private RowMapper<UserBookLoan> rowMapper() {
         return new RowMapper<UserBookLoan>() {
+
             @Override
             public UserBookLoan mapRow(ResultSet rs, int rowNum) throws SQLException {
                 User user = new User(rs.getInt("user_id"), rs.getString("user_name"), rs.getString("user_email"));
@@ -50,6 +52,7 @@ public class ReadUserWithLoansCloseToReturnReaderConfig {
                 UserBookLoan userBookLoan = new UserBookLoan(user, book, rs.getDate("loan_date"));
                 return userBookLoan;
             }
+
         };
     }
 }

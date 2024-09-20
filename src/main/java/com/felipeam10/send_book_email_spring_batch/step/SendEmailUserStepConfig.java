@@ -18,18 +18,20 @@ import org.springframework.transaction.PlatformTransactionManager;
 public class SendEmailUserStepConfig {
 
     @Autowired
-    @Qualifier("transactionManagerApp") // Qualifier define a anotação para identificar a dependência
+    @Qualifier("transactionManagerApp")
     private PlatformTransactionManager transactionManager;
+
     @Bean
-    public Step sendEmailUserStep(ItemReader<UserBookLoan> readUserWithLoansCloseToReturnReader,
-            ItemProcessor<UserBookLoan, Mail> processorLoanNotificationEmailProcessor,
-            ItemWriter<Mail> sendEmailReqyestReturnWriter,
-            JobRepository jobRepository) {
+    public Step sendEmailUserStep(ItemReader<UserBookLoan> readUsersWithLoansCloseToReturnReader,
+                                  ItemProcessor<UserBookLoan, Mail> processLoanNotificationEmailProcessor,
+                                  ItemWriter<Mail> sendEmailRequestReturnWriter,
+                                  JobRepository jobRepository) {
         return new StepBuilder("sendEmailUserStep", jobRepository)
                 .<UserBookLoan, Mail>chunk(1, transactionManager)
-                .reader(readUserWithLoansCloseToReturnReader)
-                .processor(processorLoanNotificationEmailProcessor)
-                .writer(sendEmailReqyestReturnWriter)
+                .reader(readUsersWithLoansCloseToReturnReader)
+                .processor(processLoanNotificationEmailProcessor)
+                .writer(sendEmailRequestReturnWriter)
                 .build();
     }
+
 }
