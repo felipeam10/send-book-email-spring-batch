@@ -1,0 +1,69 @@
+
+
+StackSpot AI (default)
+The steps I provided for creating a SendGrid account are platform-independent, meaning they can be followed on any operating system, including Windows. You just need a web browser to access the SendGrid website and follow the steps.
+
+Here’s a quick recap of the steps to create a SendGrid account on Windows:
+
+Obs nº 01: Sendgrid will ask you for a valid domain. If you have one, ok. If not, get a domain from a small website, for example, that you know.
+
+
+Steps to Create a SendGrid Account on Windows:
+1-Open a Web Browser (e.g., Chrome, Edge, Firefox):
+
+On your Windows machine, open your preferred web browser.
+
+2-Go to the SendGrid Website:
+
+Visit SendGrid's official website.
+
+3-Click on "Start for Free" or "Sign Up":
+
+On the homepage, you should see a button labeled "Start for Free" or "Sign Up". Click on it to begin the registration process.
+
+4-Fill in Your Information:
+
+You will be asked to provide the following details:
+Email Address: Enter your valid email address.
+Username: Choose a unique username.
+Password: Create a strong password.
+Company Name: (Optional) Enter your company name if applicable.
+
+5-Agree to Terms and Conditions:
+
+Review and accept SendGrid's terms of service and privacy policy.
+
+6-Verify Your Email:
+
+After submitting the form, SendGrid will send a verification email to the address you provided. Check your inbox and click on the verification link to confirm your email.
+
+7-Set Up Two-Factor Authentication (Optional but Recommended - do it):
+
+For added security, you may be prompted to set up two-factor authentication (2FA). Follow the instructions to enable 2FA using an authentication app or SMS.
+
+8-Choose a Plan: I choosed the free plan
+
+SendGrid offers both free and paid plans. You can start with the Free Plan, which allows you to send a limited number of emails per day. If you need more features or higher limits, you can choose a paid plan.
+
+9-Complete Your Profile:
+
+You may be asked to provide additional information, such as your address, phone number, and payment details (if you choose a paid plan).
+
+10-Access the Dashboard:
+
+Once your account is created and verified, you can log in to the SendGrid dashboard to start configuring your email settings, API keys, and other features.
+
+Obs nº 02:
+***Here the more important step.***
+You have will generate the API Keys. After in Windows you have insert the API Key in environment variables.
+Example:
+Variable name: SENDGRID_API_KEY
+Variable value: your key here
+
+11-Start Sending Emails:
+
+You can now integrate SendGrid with your application or use their web interface to send emails.
+If you encounter any issues or need more specific instructions for Windows, feel free to ask!
+
+
+Obs: in Windows you have

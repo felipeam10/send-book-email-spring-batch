@@ -53,35 +53,42 @@ docker-compose down
 - Port: 3307
 - User: root / user
 
+4. After to climb your Docker, access phpMyAdmin for manager your database: http://localhost:5050/index.php
+5. Now, after you logged in database. You have create tables and populate her. The script for your database is in the file ````\send-book-email-spring-batch\import.sql```` 
+6. In table ````tb_user```` alter the collumn ````email```` to your email to be received.
+7. In table ````tb_user_book_loan```` alter the collumn ````loan_date```` to the current date you are in minus 06 days. Change at least one line.
+8. Now you will configure the Send Grid Plattform, read the file ````SendGridDetails.txt```` in resource folder. I suffered a lot. I hope you don't suffer as much.
+9. In class ````ProcessLoanNotificationEmailProcessorConfig.java```` and in the method ````process```` insert your email that was configurate in Send Grid for to send.
+10. In class ````QuartzConfig.java```` and in the method ````jobTrigger```` configure the time for your job execution.
 
 
 [Return to Index](#index)
 
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-Antes de iniciar, assegure-se de ter o ambiente Java corretamente configurado em sua máquina. Abaixo você tem a relação das tecnologias que foram utilizadas no processo de desenvolvimento do projeto.
+Before starting, make sure you have the Java environment correctly configured on your machine. Below you have a list of the technologies that were used in the project development process.
 
-| Tecnologia                     | Versão                                     |
-|--------------------------------|--------------------------------------------|
-| Sistema Operacional            | Windows 10                                 |
-| Linguagem de Programação (JDK) | java 17.0.7 2023-04-18 LTS                 
-| Framework                      | Spring Boot 3.3.3                          |
-| Banco de Dados                 | MySQL                                      |
-| IDE                            | IntelliJ IDEA 2023.1.1 (Community Edition) |
-| Container                      | Docker v4.24.2                             |
+| Technology                 | Version                                    |
+|----------------------------|--------------------------------------------|
+| Operating System           | Windows 10                                 |
+| Programming Language (JDK) | java 17.0.7 2023-04-18 LTS                 
+| Framework                  | Spring Boot 3.3.3                          |
+| Database                   | MySQL                                      |
+| IDE                        | IntelliJ IDEA 2023.1.1 (Community Edition) |
+| Container                  | Docker v4.24.2                             |
 
 [Return to Index](#index)
 
-## Contribuições 
+## Contributions
 
-Caso tenha uma contribuição que possa melhorar este projeto, por favor, abra uma issue ou um pull request, seguindo os passos abaixo.
+If you have a contribution that could improve this project, please open an issue or pull request by following the steps below.
 
-1. Crie um 'Fork' do projeto
-2. Crie uma 'Branch' para sua modificação (`git checkout -b feature/yourFeatureName`)
-3. Faça o 'Commit' das suas mudanças (`git commit -m 'Add some yourFeatureName'`)
-4. 'Push' para a 'Branch' (`git push origin feature/yourFeatureName`)
-5. Abra uma 'Pull Request'
+1. Fork the project
+2. Create a branch for your modification (`git checkout -b feature/yourFeatureName`)
+3. Commit your changes (`git commit -m 'Add some yourFeatureName'`)
+4. Push to the branch (`git push origin feature/yourFeatureName`)
+5. Open a pull request
 
 [Return to Index](#index)
 

@@ -15,6 +15,7 @@ public class QuartzConfig {
 
     @Bean
     public Trigger jobTrigger() {
+//                   <second> <minute> <hour> <day-of-month> <month> <day-of-week> <year (optional)>
         String exp = "0 03 01 * * ?";
         return TriggerBuilder
                 .newTrigger()

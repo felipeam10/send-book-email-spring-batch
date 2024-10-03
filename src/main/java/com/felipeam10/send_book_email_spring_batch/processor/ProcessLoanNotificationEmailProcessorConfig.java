@@ -18,23 +18,23 @@ public class ProcessLoanNotificationEmailProcessorConfig {
 
             @Override
             public Mail process(UserBookLoan loan) throws Exception {
-                Email from = new Email("autoscarcarros@gmail.com", "Biblioteca UFU");
+                Email from = new Email("youremail@here.com", "Library UFU");
                 Email to = new Email(loan.getUser().getEmail());
                 Content content = new Content("text/plain", generateEmailText(loan));
-                Mail mail = new Mail(from, "Notificaçao devoluçao livro", to, content);
+                Mail mail = new Mail(from, "Book return notification", to, content);
                 Thread.sleep(1000);
                 return mail;
             }
 
             private String generateEmailText(UserBookLoan loan) {
                 StringBuilder writer = new StringBuilder();
-                writer.append(String.format("Prezado(a), %s, matricula %d\n", loan.getUser().getName(), loan.getUser().getId()));
-                writer.append(String.format("Informamos que o prazo de devolução do livro %s é amanhã (%s) \n", loan.getBook().getName(), GenerateBookReturnDate.getDate(loan.getLoan_date())));
-                writer.append("Solicitamos que você renove o livro ou devolva, assim que possível.\n");
-                writer.append("A Biblioteca Municipal está funcionando de segunda a sexta, das 9h às 17h.\n\n");
-                writer.append("Atenciosamente,\n");
-                writer.append("Setor de empréstimo e devolução\n");
-                writer.append("BIBLIOTECA MUNICIPAL");
+                writer.append(String.format("Dear, %s, registration %d\n", loan.getUser().getName(), loan.getUser().getId()));
+                writer.append(String.format("we inform you that the deadline for returning the book %s it's tomorrow (%s) \n", loan.getBook().getName(), GenerateBookReturnDate.getDate(loan.getLoan_date())));
+                writer.append("We ask that you renew the book or return it as soon as possible.\n");
+                writer.append("The Library is open from Monday to Friday, from 9am to 5pm.\n\n");
+                writer.append("Yours sincerely,\n");
+                writer.append("Loan and return sector\n");
+                writer.append("Library UFU");
                 return writer.toString();
             }
 
