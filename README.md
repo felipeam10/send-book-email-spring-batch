@@ -5,7 +5,7 @@
 ## Index
 
 - [About](#about)
-- [Complete challenge documentation](#documentação-completa-desafio)
+- [Support Material](#support-material)
 - [How to execute the project](#como-executar-o-projeto)
 - [Used Technologies](#tecnologias-utilizadas)
 - [How to contribute](#como-contribuir)
