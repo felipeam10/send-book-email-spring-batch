@@ -54,12 +54,13 @@ docker-compose down
 - User: root / user
 
 4. After to climb your Docker, access phpMyAdmin for manager your database: http://localhost:5050/index.php
-5. Now, after you logged in database. You have create tables and populate her. The script for your database is in the file ````\send-book-email-spring-batch\import.sql```` 
-6. In table ````tb_user```` alter the collumn ````email```` to your email to be received.
-7. In table ````tb_user_book_loan```` alter the collumn ````loan_date```` to the current date you are in minus 06 days. Change at least one line.
-8. Now you will configure the Send Grid Plattform, read the file ````SendGridDetails.txt```` in resource folder. I suffered a lot. I hope you don't suffer as much.
-9. In class ````ProcessLoanNotificationEmailProcessorConfig.java```` and in the method ````process```` insert your email that was configurate in Send Grid for to send.
-10. In class ````QuartzConfig.java```` and in the method ````jobTrigger```` configure the time for your job execution.
+5. In "Servidor" type "mysql-docker", use user "root" whith password "1234567".
+6. Now, after you logged in database. You will to create the database with name "library". And too you will have create tables and populate her. The script for your database is in the file ````\send-book-email-spring-batch\import.sql````. 
+7. In table ````tb_user```` alter the collumn ````email```` to your email to be received.
+8. In table ````tb_user_book_loan```` alter the collumn ````loan_date```` to the current date you are in minus 06 days. Change at least one line.
+9. Now you will configure the Send Grid Plattform, read the file ````SendGridDetails.txt```` in resource folder. I suffered a lot. I hope you don't suffer as much.
+10. In class ````ProcessLoanNotificationEmailProcessorConfig.java```` and in the method ````process```` insert your email that was configurate in Send Grid for to send.
+11. In class ````QuartzConfig.java```` and in the method ````jobTrigger```` configure the time for your job execution.
 
 
 [Return to Index](#index)
