@@ -58,6 +58,27 @@ docker-compose down
 6. Now, after you logged in database. You will to create the database with name "library". And too you will have create tables and populate her. The script for your database is in the file ````\send-book-email-spring-batch\import.sql````. 
 7. In table ````tb_user```` alter the collumn ````email```` to your email to be received.
 8. In table ````tb_user_book_loan```` alter the collumn ````loan_date```` to the current date you are in minus 06 days. Change at least one line.
+
+``` 
+Important:
+Run the query to verify that it returns the results for the changed fields:
+```
+#### Query to get users who have borrowed books close to return (business rule: books must be returned or renewed within 7 days / Read Step)
+
+```sql
+SELECT
+    user.id as user_id, 
+    user.name as user_name, 
+    user.email as user_email, 
+    book.id as book_id, 
+    book.name as book_name, 
+    loan.loan_date 
+FROM tb_user_book_loan as loan 
+INNER JOIN tb_user as user ON loan.user_id = user.id 
+INNER JOIN tb_book as book ON loan.book_id = book.id 
+WHERE DATE_ADD(loan_date, INTERVAL 6 DAY) = DATE(NOW());
+```
+
 9. Now you will configure the Send Grid Plattform, read the file ````SendGridDetails.txt```` in resource folder. I suffered a lot. I hope you don't suffer as much.
 10. In class ````ProcessLoanNotificationEmailProcessorConfig.java```` and in the method ````process```` insert your email that was configurate in Send Grid for to send.
 11. In class ````QuartzConfig.java```` and in the method ````jobTrigger```` configure the time for your job execution.
